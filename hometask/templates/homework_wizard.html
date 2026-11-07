@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание домашнего задания</title>
+</head>
+<body>
+
+    <h1>Создание домашнего задания</h1>
+
+    <h2>Шаг {{ step }} из 3</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            {% if step == 3 %}
+                Создать задание
+            {% else %}
+                Далее
+            {% endif %}
+        </button>
+    </form>
+
+</body>
+</html>

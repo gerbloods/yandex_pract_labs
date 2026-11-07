@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Домашние задания</title>
+</head>
+<body>
+    <h1>Список домашних заданий</h1>
+    <button onclick="window.location.href='/create'">Создать новое задание одной формой</button>
+    <button onclick="window.location.href='/wizard/1/'">Создать новое задание в несколько шагов</button>
+
+    {% for homework in homeworks %}
+        <div>
+            <h2>{{ homework.title }}</h2>
+
+            <p>Предмет: {{ homework.subject.name }}</p>
+            <p>Описание: {{ homework.description }}</p>
+            <p>Срок сдачи: {{ homework.due_date }}</p>
+            <p>
+                Статус:
+                {% if homework.is_completed %}
+                    Выполнено
+                {% else %}
+                    Не выполнено
+                {% endif %}
+            </p>
+
+            <p>Теги:</p>
+            <ul>
+                {% for tag in homework.tags.all %}
+                    <li>{{ tag.name }}</li>
+                {% empty %}
+                    <li>Нет тегов</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <hr>
+    {% empty %}
+        <p>Домашних заданий пока нет.</p>
+    {% endfor %}
+</body>
+</html>
